@@ -1,0 +1,123 @@
+---
+description:
+globs:
+alwaysApply: true
+---
+
+# Rule: Using New Modus Web Components
+
+This document provides a central list of all available Modus Web Components and the steps to follow when integrating a new one in any SolidJS project.
+
+## Integration Steps for New Components
+
+When using a Modus component for the first time, you must follow these steps:
+
+### 1. Check Component Documentation
+
+If your project has component documentation files, review the corresponding documentation to understand the component's properties, events, and usage examples. Otherwise, refer to the official Modus Web Components documentation.
+
+### 2. Update TypeScript Declarations
+
+To ensure TypeScript recognizes the new component and its properties, you **must** add it to the `IntrinsicElements` interface in your project's TypeScript declarations file (commonly `global.d.ts` or similar).
+
+```typescript
+// In your TypeScript declarations file (e.g., global.d.ts)
+declare module "solid-js" {
+  namespace JSX {
+    interface IntrinsicElements {
+      // ... existing components
+      "modus-wc-new-component-name": {
+        // Add component-specific props here
+      };
+    }
+  }
+}
+```
+
+### 3. Use the Mount Guard
+
+Remember to wrap any page or component that uses Modus components with the client-side mount guard to prevent SSR hydration issues.
+
+```tsx
+<Show when={mounted()} fallback={<div>Loading...</div>}>
+  {/* Your new component goes here */}
+</Show>
+```
+
+### 4. Styling Components: The Wrapper Pattern
+
+While many Modus components have a `custom-class` attribute for applying styles, you may find that some CSS properties like `border`, `box-shadow`, or `background-color` do not apply as expected. This is often because the component's own internal styles take precedence.
+
+A more reliable approach for these "container-level" styles is to wrap the Modus component in a standard HTML element (like a `<div>` or `<header>`) and apply your custom class to the wrapper.
+
+**Correct Example (Recommended):**
+
+```tsx
+// Apply styles to the wrapping <header> element
+<header class="custom-header-styles">
+  <modus-wc-navbar />
+</header>
+```
+
+```css
+/* In your CSS file */
+.custom-header-styles {
+  border-bottom: 1px solid #e2e8f0;
+  box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1);
+}
+```
+
+**Potentially Problematic Example:**
+
+```tsx
+/* This may not render the border or shadow correctly */
+<modus-wc-navbar custom-class="custom-header-styles" />
+```
+
+## Available Modus Web Components
+
+Below is a list of all available components. Refer to your project's component documentation or the official Modus Web Components documentation for detailed usage information.
+
+- `modus-wc-accordion`
+- `modus-wc-alert`
+- `modus-wc-autocomplete`
+- `modus-wc-avatar`
+- `modus-wc-badge`
+- `modus-wc-breadcrumbs`
+- `modus-wc-button`
+- `modus-wc-card`
+- `modus-wc-checkbox`
+- `modus-wc-chip`
+- `modus-wc-collapse`
+- `modus-wc-date`
+- `modus-wc-divider`
+- `modus-wc-dropdown-menu`
+- `modus-wc-icon`
+- `modus-wc-input-feedback`
+- `modus-wc-input-label`
+- `modus-wc-loader`
+- `modus-wc-menu`
+- `modus-wc-menu-item`
+- `modus-wc-modal`
+- `modus-wc-navbar`
+- `modus-wc-number-input`
+- `modus-wc-pagination`
+- `modus-wc-progress`
+- `modus-wc-radio`
+- `modus-wc-rating`
+- `modus-wc-select`
+- `modus-wc-side-navigation`
+- `modus-wc-skeleton`
+- `modus-wc-slider`
+- `modus-wc-stepper`
+- `modus-wc-switch`
+- `modus-wc-table`
+- `modus-wc-tabs`
+- `modus-wc-text-input`
+- `modus-wc-textarea`
+- `modus-wc-theme-switcher`
+- `modus-wc-time-input`
+- `modus-wc-toast`
+- `modus-wc-toolbar`
+- `modus-wc-tooltip`
+- `modus-wc-typography`

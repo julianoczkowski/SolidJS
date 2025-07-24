@@ -1,0 +1,133 @@
+---
+description:
+globs:
+alwaysApply: false
+---
+
+# Cursor Rules for SolidJS Projects with Modus Web Components
+
+This document provides a set of rules and guidelines for an AI assistant to follow when working on SolidJS projects that use Modus Web Components. The goal is to ensure consistency and adherence to best practices for integrating these technologies.
+
+## 1. Project Overview
+
+This applies to projects built with **SolidJS/SolidStart**, **Tailwind CSS** (optional), and **Trimble's Modus Web Components**. These guidelines demonstrate how to effectively integrate these technologies.
+
+- **Framework**: SolidJS or SolidStart (with optional server-side rendering)
+- **UI Components**: Trimble Modus Web Components (`@trimble-oss/moduswebcomponents`)
+- **Styling**: Tailwind CSS & Modus Styles (or other CSS frameworks)
+- **Icons**: Modus Icons font
+
+## 2. Core Principles
+
+### SSR and Client-Side Rendering
+
+For SolidStart projects with SSR, Modus Web Components are custom elements that need to interact with the DOM. This creates challenges with hydration.
+
+**Rule 1.1: Register Custom Elements on Client Only**
+The `defineCustomElements()` function from `@trimble-oss/moduswebcomponents/loader` **must** be called only on the client. The recommended convention is to call it in your client-side entry file (commonly `entry-client.tsx` or similar). Do not move it or add it anywhere else.
+
+**Rule 1.2: Use Client-Side Mount Guard for Components**
+To prevent hydration mismatches, any route or component that renders Modus Web Components should use a "mount guard". This involves a signal `mounted` that is set to `true` in `onMount` and a `<Show when={mounted()}>` component that wraps the UI.
+
+```tsx
+// Correct usage in a route/component
+import { createSignal, onMount, Show } from "solid-js";
+
+export default function MyComponent() {
+  const [mounted, setMounted] = createSignal(false);
+  onMount(() => setMounted(true));
+
+  return (
+    <Show when={mounted()} fallback={<div>Loading...</div>}>
+      {/* Modus components go here */}
+      <modus-wc-button>My Button</modus-wc-button>
+    </Show>
+  );
+}
+```
+
+## 3. Styling
+
+The project uses a combination of Modus's own styles and your preferred CSS framework (such as Tailwind CSS).
+
+**Rule 2.1: CSS Import Order**
+The project imports global stylesheets. The recommended approach is to import them in your main app component or entry file.
+
+The correct import order is:
+
+1.  `@trimble-oss/moduswebcomponents/modus-wc-styles.css`
+2.  `@trimble-oss/modus-icons/dist/field-systems/fonts/modus-icons.css`
+3.  Your custom CSS file (for global overrides)
+
+If styles are imported in a CSS file, framework-specific imports (like `@import "tailwindcss";`) should come last.
+
+**Rule 2.2: Theme Configuration**
+The application theme should be set manually in your main app component within the `onMount` hook. Adjust according to your theme preferences:
+
+- `document.documentElement.className = 'light';`
+- `document.documentElement.setAttribute('data-theme', 'modus-classic-light');`
+- `document.documentElement.setAttribute('data-mode', 'light');`
+
+## 4. TypeScript and Component Declarations
+
+**Rule 3.1: Augment JSX for New Components**
+To ensure TypeScript recognizes new Modus components, you **must** add them to the `solid-js` JSX namespace augmentation in your TypeScript declarations file (commonly `global.d.ts` or similar).
+
+```typescript
+// In your TypeScript declarations file
+declare module "solid-js" {
+  namespace JSX {
+    interface IntrinsicElements {
+      // ... existing components
+      "modus-wc-new-component": {
+        // Add props here
+      };
+    }
+  }
+}
+```
+
+**Rule 3.2: Typing Component Events**
+Modus components emit custom events. When handling these events, use the provided `CustomEvent` types for type safety.
+
+- `onButtonClick` uses `CustomEvent<MouseEvent | KeyboardEvent>`.
+
+## 5. Modus Components Usage
+
+### Icons
+
+**Rule 4.1: Using Icons**
+To display an icon, use an `<i>` tag with the `modus-icons` class. The icon name is the text content of the tag.
+
+```tsx
+// Correct
+<i class="modus-icons">settings</i>
+
+// Incorrect
+<modus-wc-icon name="settings" />
+```
+
+**Rule 4.2: Finding Icon Names**
+Use the Modus icon names list to find correct icon names. Always refer to the official documentation or icon list to find the correct icon name.
+
+**Rule 4.3: Icons in Buttons**
+To add an icon to a button, nest the `<i>` tag inside the `<modus-wc-button>` component, alongside a `<span>` for the text if needed.
+
+```tsx
+<modus-wc-button>
+  <i class="modus-icons">add</i>
+  <span>Add Item</span>
+</modus-wc-button>
+```
+
+### Buttons
+
+**Rule 4.4: Button Attributes**
+Use the attributes defined in your TypeScript declarations to configure buttons (e.g., `color`, `variant`, `size`).
+
+## 6. File and Project Structure
+
+- **Routes**: New pages go in your routes directory (commonly `routes/` or `pages/`).
+- **Reusable Components**: New shared components go in your components directory (commonly `components/`).
+- **Documentation**: Refer to your project's documentation about setup and component usage before making major changes.
+- **Component Documentation**: If your project has component documentation, refer to it when adding web components.

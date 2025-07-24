@@ -1,0 +1,273 @@
+---
+description: Complete Modus color reference and usage guide for SolidJS projects
+globs:
+alwaysApply: false
+---
+
+# Rule: Modus Color Reference and Usage Guide
+
+This document provides the complete color reference for Modus Web Components and guidelines for using them correctly in SolidJS projects.
+
+## Core Principle: Use Theme Variables
+
+To maintain visual consistency and support theming (e.g., light and dark modes), you **must** use the provided Modus CSS variables instead of hard-coding hex values.
+
+These variables are defined in the Modus stylesheet and automatically update based on the active theme.
+
+### How to Use Theme Colors
+
+```css
+/* Correct - Use CSS variables */
+.my-component {
+  background-color: var(--modus-wc-color-base-100);
+  color: var(--modus-wc-color-base-content);
+  border: 1px solid var(--modus-wc-color-base-200);
+}
+
+/* Incorrect - Hard-coded values */
+.my-component {
+  background-color: #f1f1f6;
+  color: #171c1e;
+  border: 1px solid #e0e1e9;
+}
+```
+
+## Color System Overview
+
+The Modus color system uses a multi-layered approach with a base color palette that applies to semantic names based on the selected theme.
+
+### Key Variable Categories
+
+1. **Semantic Colors**: Describe the _purpose_ of the color. Always prefer these.
+
+   - `--modus-wc-color-primary`: For primary actions and highlights
+   - `--modus-wc-color-secondary`: For secondary actions
+   - `--modus-wc-color-success`, `--modus-wc-color-warning`, `--modus-wc-color-error`: For status indicators
+
+2. **Base Colors**: Describe the general UI palette for backgrounds, borders, and content.
+   - `--modus-wc-color-base-page`: Main page background color
+   - `--modus-wc-color-base-100`, `--modus-wc-color-base-200`, `--modus-wc-color-base-300`: Shades for layering UI elements
+   - `--modus-wc-color-base-content`: Primary text color
+
+## Complete Color Reference
+
+### Base Color Palette
+
+These are the foundational colors defined in the Modus system:
+
+```css
+/* White / Grays / Black */
+--modus-wc-color-white: #fff;
+--modus-wc-color-gray-light: #f1f1f6;
+--modus-wc-color-gray-0: #e0e1e9;
+--modus-wc-color-gray-1: #cbcdd6;
+--modus-wc-color-gray-2: #b7b9c3;
+--modus-wc-color-gray-3: #a3a6b1;
+--modus-wc-color-gray-4: #90939f;
+--modus-wc-color-gray-5: #7d808d;
+--modus-wc-color-gray-6: #6a6e79;
+--modus-wc-color-gray-7: #585c65;
+--modus-wc-color-gray-8: #464b52;
+--modus-wc-color-gray-9: #353a40;
+--modus-wc-color-gray-10: #171c1e;
+--modus-wc-color-trimble-gray: #252a2e;
+--modus-wc-color-black: #000;
+
+/* Blues */
+--modus-wc-color-blue-pale: #dcedf9;
+--modus-wc-color-highlight-blue: #019aeb;
+--modus-wc-color-blue-light: #217cbb;
+--modus-wc-color-trimble-blue: #0063a3;
+--modus-wc-color-blue-dark: #0e416c;
+
+/* Yellows */
+--modus-wc-color-yellow-pale: #fff5e4;
+--modus-wc-color-yellow-light: #fec157;
+--modus-wc-color-yellow: #fbad26;
+--modus-wc-color-yellow-dark: #e49325;
+
+/* Reds */
+--modus-wc-color-red-pale: #fbd4d7;
+--modus-wc-color-red-light: #e86363;
+--modus-wc-color-red: #da212c;
+--modus-wc-color-red-dark: #ab1f26;
+
+/* Greens */
+--modus-wc-color-green-pale: #e0eccf;
+--modus-wc-color-green-light: #4ea646;
+--modus-wc-color-green: #1e8a44;
+--modus-wc-color-green-dark: #006638;
+
+/* Special In-Field Colors */
+--modus-wc-in-field-success-dark-bg: #00fe00;
+--modus-wc-in-field-success-light-bg: #00d22f;
+--modus-wc-in-field-warning: #ff8b00;
+--modus-wc-in-field-error: #da212c;
+--modus-wc-in-field-info: #019aeb;
+--modus-wc-in-field-avoidance: #df4eb2;
+--modus-wc-in-field-black: #000;
+```
+
+### Theme-Specific Semantic Colors
+
+#### Modus Modern Light Theme
+
+```css
+--modus-wc-color-base-page: #fff;
+--modus-wc-color-base-100: #f1f1f6;
+--modus-wc-color-base-200: #e0e1e9;
+--modus-wc-color-base-300: #cbcdd6;
+--modus-wc-color-base-content: #171c1e;
+--modus-wc-color-primary: #0063a3;
+--modus-wc-color-primary-content: #fff;
+```
+
+#### Modus Modern Dark Theme
+
+```css
+--modus-wc-color-base-page: #000;
+--modus-wc-color-base-100: #252a2e;
+--modus-wc-color-base-200: #353a40;
+--modus-wc-color-base-300: #171c1e;
+--modus-wc-color-base-content: #cbcdd6;
+--modus-wc-color-primary: #019aeb;
+--modus-wc-color-primary-content: #000;
+```
+
+#### Modus Classic Light Theme
+
+```css
+--modus-wc-color-base-page: #fff;
+--modus-wc-color-base-100: #f1f1f6;
+--modus-wc-color-base-200: #cbcdd6;
+--modus-wc-color-base-300: #b7b9c3;
+--modus-wc-color-base-content: #171c1e;
+--modus-wc-color-info: #0063a3;
+--modus-wc-color-success: #1e8a44;
+--modus-wc-color-error: #da212c;
+--modus-wc-color-warning: #fbad26;
+```
+
+#### Modus Classic Dark Theme
+
+```css
+--modus-wc-color-base-page: #000;
+--modus-wc-color-base-100: #252a2e;
+--modus-wc-color-base-200: #464b52;
+--modus-wc-color-base-300: #353a40;
+--modus-wc-color-base-content: #cbcdd6;
+--modus-wc-color-info: #0063a3;
+--modus-wc-color-success: #1e8a44;
+--modus-wc-color-error: #da212c;
+--modus-wc-color-warning: #fbad26;
+```
+
+### Fallback Colors
+
+For browsers that don't support the `oklch` color function:
+
+#### Light Theme Fallbacks
+
+```css
+--fallback-p: #491eff;
+--fallback-pc: #d4dbff;
+--fallback-s: #ff41c7;
+--fallback-sc: #fff9fc;
+--fallback-a: #00cfbd;
+--fallback-ac: #00100d;
+--fallback-n: #2b3440;
+--fallback-nc: #d7dde4;
+--fallback-b1: #fff;
+--fallback-b2: #e5e6e6;
+--fallback-b3: #e5e6e6;
+--fallback-bc: #1f2937;
+--fallback-in: #00b3f0;
+--fallback-inc: #000;
+--fallback-su: #00ca92;
+--fallback-suc: #000;
+--fallback-wa: #ffc22d;
+--fallback-wac: #000;
+--fallback-er: #ff6f70;
+--fallback-erc: #000;
+```
+
+#### Dark Theme Fallbacks
+
+```css
+--fallback-p: #7582ff;
+--fallback-pc: #050617;
+--fallback-s: #ff71cf;
+--fallback-sc: #190211;
+--fallback-a: #00c7b5;
+--fallback-ac: #000e0c;
+--fallback-n: #2a323c;
+--fallback-nc: #a6adbb;
+--fallback-b1: #1d232a;
+--fallback-b2: #191e24;
+--fallback-b3: #15191e;
+--fallback-bc: #a6adbb;
+--fallback-in: #00b3f0;
+--fallback-inc: #000;
+--fallback-su: #00ca92;
+--fallback-suc: #000;
+--fallback-wa: #ffc22d;
+--fallback-wac: #000;
+--fallback-er: #ff6f70;
+--fallback-erc: #000;
+```
+
+## Usage Examples
+
+### Component Styling
+
+```css
+/* Card component */
+.card {
+  background-color: var(--modus-wc-color-base-page);
+  border: 1px solid var(--modus-wc-color-base-200);
+  color: var(--modus-wc-color-base-content);
+}
+
+/* Header component */
+.header {
+  background-color: var(--modus-wc-color-base-100);
+  border-bottom: 1px solid var(--modus-wc-color-base-200);
+  box-shadow: 0 1px 2px 0 var(--modus-wc-color-base-300);
+}
+
+/* Status indicators */
+.success {
+  color: var(--modus-wc-color-success);
+}
+.warning {
+  color: var(--modus-wc-color-warning);
+}
+.error {
+  color: var(--modus-wc-color-error);
+}
+.info {
+  color: var(--modus-wc-color-info);
+}
+```
+
+### Best Practices
+
+1. **Always use CSS variables** instead of hard-coded hex values
+2. **Prefer semantic colors** over base palette colors when possible
+3. **Test with multiple themes** to ensure your components work in all modes
+4. **Use base colors for layering** (100 = lightest, 300 = darkest)
+5. **Respect the color hierarchy** defined by the design system
+
+## Common Use Cases
+
+| Use Case        | Recommended Variable            |
+| --------------- | ------------------------------- |
+| Page background | `--modus-wc-color-base-page`    |
+| Card background | `--modus-wc-color-base-100`     |
+| Border colors   | `--modus-wc-color-base-200`     |
+| Text color      | `--modus-wc-color-base-content` |
+| Primary actions | `--modus-wc-color-primary`      |
+| Success states  | `--modus-wc-color-success`      |
+| Warning states  | `--modus-wc-color-warning`      |
+| Error states    | `--modus-wc-color-error`        |
+| Info states     | `--modus-wc-color-info`         |

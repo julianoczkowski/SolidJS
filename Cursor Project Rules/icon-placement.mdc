@@ -1,0 +1,47 @@
+---
+description:
+globs:
+alwaysApply: true
+---
+
+# Rule: General Icon Placement in Components
+
+When adding an icon next to text inside any component (e.g., a link or a generic `div`), place the `<i>` tag and the text inside a container that aligns them, such as a flexbox. Use a `<span>` for the text to ensure proper spacing and styling.
+
+## Example
+
+This example shows how to add an icon to a SolidJS Router `<A>` component.
+
+```tsx
+// Example inside a link
+import { A } from "@solidjs/router";
+
+<A href="/profile" class="inline-flex items-center gap-2">
+  <i class="modus-icons">user</i>
+  <span>View Profile</span>
+</A>;
+```
+
+### Modus Button Example
+
+The same principle applies to Modus Web Components.
+
+```tsx
+// Example inside a Modus Button
+<modus-wc-button color="primary">
+  <i class="modus-icons">add</i>
+  <span>Add Item</span>
+</modus-wc-button>
+```
+
+### General Container Example
+
+For any other container element, follow the same pattern:
+
+```tsx
+// Example with a generic div
+<div class="flex items-center gap-2">
+  <i class="modus-icons">settings</i>
+  <span>Settings</span>
+</div>
+```

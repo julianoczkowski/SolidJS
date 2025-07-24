@@ -1,0 +1,58 @@
+---
+description:
+globs:
+alwaysApply: true
+---
+
+# Rule: Using Modus Theme Colors
+
+This document outlines the correct way to use colors in projects using Modus Web Components to ensure all components are consistent with the application's active theme.
+
+> **📋 Complete Reference**: For a comprehensive list of all available colors, see `modus-color-reference.mdc`
+
+## The Core Principle: Use Theme Variables
+
+To maintain visual consistency and support theming (e.g., light and dark modes), you **must** use the provided Modus CSS variables instead of hard-coding hex values.
+
+These variables are defined in the Modus stylesheet and are automatically updated based on the active theme (e.g., `modus-classic-light`).
+
+### Key Variable Categories
+
+1.  **Semantic Colors**: These describe the _purpose_ of the color. Always prefer these.
+
+    - `--modus-wc-color-primary`: For primary actions and highlights.
+    - `--modus-wc-color-secondary`: For secondary actions.
+    - `--modus-wc-color-success`, `--modus-wc-color-warning`, `--modus-wc-color-error`: For status indicators.
+    - And more.
+
+2.  **Base Colors**: These describe the general UI palette. Use these for backgrounds, borders, and content.
+    - `--modus-wc-color-base-page`: The main page background color.
+    - `--modus-wc-color-base-100`, `--modus-wc-color-base-200`, etc.: Shades of the base color, typically used for layering UI elements (e.g., cards, headers).
+    - `--modus-wc-color-base-content`: The primary text color.
+
+## How to Use Theme Colors
+
+When writing custom CSS, use the `var()` function to reference these variables.
+
+### Example: Styling a Custom Header
+
+This example shows how to style an application header to be consistent with the theme.
+
+```css
+/* In your CSS file */
+.app-header-nav {
+  /* Use the lightest base color for the border */
+  border-bottom: 1px solid var(--modus-wc-color-base-100);
+
+  /* Use a slightly darker base color for the shadow */
+  box-shadow: 0 1px 2px 0 var(--modus-wc-color-base-200);
+}
+```
+
+## Where to Find the Colors
+
+For a complete list of all available color variables and their resolved values for each theme, refer to:
+
+- **`modus-color-reference.mdc`** - Complete color reference with all values
+- **Modus Web Components documentation** - Official documentation
+- Your project's documentation about Modus colors if available
