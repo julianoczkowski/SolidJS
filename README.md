@@ -1,8 +1,22 @@
 ![SolidJS + Modus LLM Header](./header.png)
 
-# SolidJS + Modus Web Components Docs + Cursor Rules & Figma MCP
+# SolidJS + Modus Web Component Docs + Cursor Rules & Figma MCP
 
 A comprehensive SolidJS project template and documentation repository featuring Trimble Modus Web Components integration, intelligent AI assistance with Cursor Memories, and enterprise-grade development standards.
+
+## 🚀 Getting Started
+
+### 1. How to use Figma MCP
+
+Configure the Figma Model Context Protocol integration to seamlessly bridge design and development workflows with AI assistance.
+
+### 2. How to setup Cursor Rules
+
+Implement comprehensive project rules and AI memories to ensure consistent development patterns and enhanced code quality.
+
+### 3. What is included in the repository
+
+Explore the complete documentation ecosystem including 40+ component guides, development standards, and intelligent AI enhancement tools.
 
 ## 🎯 Project Overview
 
