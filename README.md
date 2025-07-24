@@ -1,4 +1,6 @@
-# SolidJS + Modus Web Components Project
+![SolidJS + Modus LLM Header](./header.png)
+
+# SolidJS + Modus Web Components Docs + Cursor Rules & Figma MCP
 
 A comprehensive SolidJS project template and documentation repository featuring Trimble Modus Web Components integration, intelligent AI assistance with Cursor Memories, and enterprise-grade development standards.
 
